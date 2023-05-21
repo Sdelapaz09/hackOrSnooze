@@ -3,7 +3,7 @@
 let storyList;
 
 async function getAndShowStoriesOnStart(){
-    storyList = await storyList.getStories();
+    storyList = await StoryList.getStories();
     $storiesLoadingMsg.remove();
     putStoriesOnPage();
 }
@@ -12,7 +12,7 @@ function generateStoryMarkup(story, showDeleteBtn = false){
     const hostName = story.getHostName();
     const showStar = Boolean(currUser);
 
-    return $allStoriesList(`
+    return $(`
         <li id="${story.storyId}">
             <div>
                 ${showDeleteBtn ? getDeleteBtnHTML() : ""}
@@ -78,7 +78,7 @@ async function submitNewStory(e){
     const title = $("#create-title").val();
     const url = $("#create-url").val();
     const author = $("#create-author").val();
-    const username = currentUser.username;
+    const username = currUser.username;
     const storyData = {title, url, author, username};
 
     const story = await storyList.addStory(currUser, storyData);
@@ -86,7 +86,6 @@ async function submitNewStory(e){
     $allStoriesList.prepend($story);
 
     $submitForm.slideUp("slow");
-    $submitForm.on("submit", submitNewStory);
     $submitForm.trigger("reset");
 }
 $submitForm.on("submit", submitNewStory);
@@ -103,18 +102,25 @@ function putUserStoriesOnPage(){
             $userStories.append($story);
         }
     }
+    $userStories.show();
+}
 
     function putFavoritesListOnPage(){
         console.debug("putFavoritesListOnPage");
-        $favoritedStories.append(`<h5> No favorites added!</h5>`);
-    } else {
-        for(let story of curruser.favorites){
+        $favoritedStories.empty();
+      
+
+        if(currUser.favorites.length === 0){
+            $favoritedStories.append(`<h5> No favorites added!</h5>`);
+        } else {
+             for(let story of curruser.favorites){
             const $story = generateStoryMarkup(story);
             $favoritedStories.append($story);
+            }
         }
+    $favoritedStories.show();
     }
-    $favoritedStories.append($story);
-}
+
 
 async function toggleStoryFavorites(e){
     console.debug("toggleStoryFavorite");
@@ -129,6 +135,7 @@ async function toggleStoryFavorites(e){
         $tgt.closest("i").toggleClass("fas far");
     } else {
         await currUser.addFavorite(story);
+        $tgt.closest("i").toggleClass("fas far");
     }
 }
-$storiesLists.on("click", ".star", toggleStoryFavorite);
+$storiesLists.on("click", ".star", toggleStoryFavorites);

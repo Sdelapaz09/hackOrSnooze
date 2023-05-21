@@ -14,11 +14,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hack or Snooze</title>
-    <link rel="stylesheet" href="css/site.css">
-    <link rel="stylesheet" href="css/user.css">
-    <link rel="stylesheet" href="css/stories.css">
-    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="css/site.css"/>
+    <link rel="stylesheet" href="css/user.css"/>
+    <link rel="stylesheet" href="css/stories.css"/>
+    <link rel="stylesheet" href="css/nav.css"/>
 </head>
+
 <body>
 
 <!-- navbar -->
@@ -27,18 +29,16 @@
         <a class="nav-link" href="#" id="nav-all">Hack or Snooze</a>
     </div>
     <!-- Adds submit, favorites, & my stories links || Added -->
-    <div class="main-nav-links hidden">
-        <a class="nav-link" href="#" id="nav-submit-story">Submit</a>
-        <a class="nav-link" href="#" id="nav-favorites">Favorites</a>
-        <a class="nav-link" href="#" id="nav-my-stories">My Stories</a>
+    <div class="navbar-left">
+        <a class="nav-link hidden" href="#" id="nav-submit">Submit</a>
+        <a class="nav-link hidden" href="#" id="nav-favorites">Favorites</a>
+        <a class="nav-link hidden" href="#" id="nav-my-stories">My Stories</a>
     </div>
     <!-- Adds Login/signup, user profile, and logout links -->
-    <div>
-        <div class="nav-right">
-            <a class="nav-link" href="#" id="nav-login">Login/Signup</a>
-            <a class="nav-link" href="#" id="nav-user-profile">User Profile</a>
-            <a class="hidden" href="#" id="nav-logout"><small>Logout</small></a>
-        </div>
+    <div class="nav-right">
+        <a class="nav-link" href="#" id="nav-login">Login/Signup</a>
+        <a class="nav-link" href="#" id="nav-user-profile">User Profile</a>
+        <a class="hidden" href="#" id="nav-logout"><small>Logout</small></a>
     </div>
 </nav>
 
@@ -46,25 +46,25 @@
 <section id="stories-container" class="stories-container container">
 
     <!-- Form for submitting new story || Added -->
-    <form action="" class="hidden" id="submit-form">
+    <form action="#" class="hidden" id="submit-form">
         <div>
             <label for="create-author">Author</label>
-            <input id="create-author" required placeholder="Author Name">
+            <input id="create-author" required placeholder="Author Name"/>
         </div>
         <div>
             <label for="create-title">Title</label>
-            <input id="create-title" required placeholder="Story Title">
+            <input id="create-title" required placeholder="Story Title"/>
         </div>
         <div>
             <label for="create-url">URL</label>
-            <input id="create-url" required type="url" placeholder="story url">
+            <input id="create-url" required type="url" placeholder="story url"/>
         </div>
         <button type="submit">Submit</button>
         <hr>
     </form>
 
     <!-- Loading message -->
-    <div id="stories-loading-msg">Loading</div>
+    <div id="stories-loading-msg">Loading&hellip;</div>
 
     <!-- Lists all stories -->
     <ol id="all-stories-list" class="stories-list"></ol>
@@ -84,6 +84,10 @@
         <h4>Login</h4>
         <div class="login-input">
             <label for="login-username">Username</label>
+            <input id="login-username" autocomplete="current-username">
+        </div>
+        <div class="login-input">
+            <label for="login-password">Password</label>
             <input id="login-password" type="password" autocomplete="current-password">
         </div>
         <button type="submit">Login</button>
@@ -99,8 +103,13 @@
         </div>
         <div class="login-input">
             <label for="signup-username">Username</label>
-            <input id="signup-username" autocomplete="new-password" type="password">
+            <input id="signup-username" autocomplete="new-username">
         </div>
+        <div class="login-input">
+            <label for="signup-password">Password</label>
+            <input id="signup-password" autocomplete="new-password" type="password">
+        </div>
+        <button type="submit">Create Account</button>
     </form>
 </section>
 

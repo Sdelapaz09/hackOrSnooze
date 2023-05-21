@@ -51,7 +51,7 @@ class StoryList{
     async removeStory(user, storyId){
         const token = user.loginToken;
         await axios ({
-            url: `${BASE_URL}/stories/${storyId}`, method: "DELETE", data: {token: user.loginToken}
+            url: `${BASE_URL}/stories/${storyId}`, method: "DELETE", data: {token}/*: user.loginToken*/
         });
 
         /*filter out stories to remove based on storyId && removeStory added*/
@@ -94,8 +94,13 @@ class User{
         let {user} = response.data;
 
         return new User({
-            username: user.username, name: user.name, createdAt: user.createdAt, favorites: user.favorites, userStories: user.stories
-        }, response.data.token);
+            username: user.username, 
+            name: user.name, 
+            createdAt: user.createdAt, 
+            favorites: user.favorites, 
+            userStories: user.stories
+        }, response.data.token
+        );
     }
 
     /* When user is already verifed, automatically log them in */
@@ -108,7 +113,11 @@ class User{
             let {user} = response.data;
 
             return new User({
-                username: user.username, name: user.name, createdAt: user.createdAt, favorites: user.favorites, userStories: user.stories
+                username: user.username, 
+                name: user.name, 
+                createdAt: user.createdAt, 
+                favorites: user.favorites, 
+                userStories: user.stories
             }, token);
         } catch (err){
             console.error("loginViaStoredCredentials failed", err);

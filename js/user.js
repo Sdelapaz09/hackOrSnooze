@@ -53,7 +53,7 @@ async function checkForRememberedUser(){
 function saveUserCredentialsInLocalStorage(){
     console.debug("saveUserCredentialsInLocalStorage");
     if(currUser){
-        localStorage.setItem("token", currentUser.loginToken);
+        localStorage.setItem("token", currUser.loginToken);
         localStorage.setItem("username", currUser.username);
     }
 }
