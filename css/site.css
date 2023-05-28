@@ -31,6 +31,7 @@ a:hover{
     text-decoration: underline;
 }
 
+/* Main content */
 .container{
     display: flex;
     flex-direction: column;
@@ -75,6 +76,7 @@ form input{
     padding: 8px;
     width: 300px;
     box-shadow: 0 0 3px 1px lightgray;
+    margin: auto;
 }
 
 form input:focus{
