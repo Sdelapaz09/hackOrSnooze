@@ -28,7 +28,6 @@ function generateStoryMarkup(story, showDeleteBtn = false){
     `);
 }
 
-/* Added */
 function getDeleteBtnHTML(){
     return `
         <span class="trash-can">

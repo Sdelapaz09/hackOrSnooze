@@ -8,7 +8,7 @@ function navAllStories(evt){
 }
 $body.on("click", "#nav-all", navAllStories);
 
-/* Functionception- use inner functions and define later. Added & modified after navLoginClick function */
+/* Functionception - use inner functions and define later. Added & modified after navLoginClick function */
 function navSubmitStoryClick(e){
     console.debug("navSubmitStoryClick", e);
     hidePageComponents();

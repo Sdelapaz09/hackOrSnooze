@@ -58,6 +58,7 @@ function saveUserCredentialsInLocalStorage(){
     }
 }
 
+/*Added */
 async function updateUIOnUserLogin(){
     console.debug("updateUIOnUserLogin");
 
