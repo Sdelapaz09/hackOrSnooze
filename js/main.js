@@ -41,3 +41,4 @@ async function start(){
 
     if(currUser) updateUIOnUserLogin();
 }
+$(start);
