@@ -39,7 +39,13 @@ function navLoginClick(e){
     $signupForm.show();
     $storiesContainer.hide();
 }
-$navLogin.on("click","#navLoginClick", navLoginClick);
+$navLogin.on("click", navLoginClick);
+
+function navProfileClick(e){
+    console.debug("navProfiledClick", e);
+    hidePageComponents();
+    $userProfile.show();
+}
 
 function updateNavOnLogin(){
     console.debug("updateNavOnLogin");

@@ -35,7 +35,7 @@ class StoryList{
     }
 
     /* Adds story data to API, creates a story instance, adds it to the list, & returns new instance && added*/
-    async addStory(user, {title, author, url}){
+    async addStory(user, { title, author, url }){
         const token = user.loginToken;
         const response = await axios({
             method: "POST", url:`${BASE_URL}/stories`, data:{token, story:{title, author, url}},
@@ -51,7 +51,7 @@ class StoryList{
     async removeStory(user, storyId){
         const token = user.loginToken;
         await axios ({
-            url: `${BASE_URL}/stories/${storyId}`, method: "DELETE", data: {token}
+            url: `${BASE_URL}/stories/${storyId}`, method: "DELETE", data: {token: user.loginToken}
         });
 
         /*filter out stories to remove based on storyId && removeStory added*/
@@ -75,23 +75,30 @@ class User{
     /* Adds user to API, creates an instance & returns it */
     static async signup(username, password, name){
         const response = await axios({
-            url: `${BASE_URL}/signup`, method: "POST", data: {user: {username, password, name}},
+            url: `${BASE_URL}/signup`, method: "POST", data: { user: { username, password, name }},
         });
 
-        let {user} = response.data;
+        let { user } = response.data;
 
-        return new User({
-            username: user.username, name: user.name, createdAt: user.createdAt, favorites: user.favorites, userStories: user.stories
-        }, response.data.token);
+        return new User(
+            {
+            username: user.username, 
+            name: user.name, 
+            createdAt: user.createdAt, 
+            favorites: user.favorites, 
+            userStories: user.stories
+            }, 
+            response.data.token
+        );
     }
 
     /*Logins in with user API, creates the instance & returns it */
     static async login(username, password){
         const response = await axios({
-            url: `${BASE_URL}/login`, method: "POST", data:{user:{username, password}},
+            url: `${BASE_URL}/login`, method: "POST", data:{ user:{ username, password }},
         });
 
-        let {user} = response.data;
+        let { user } = response.data;
 
         return new User({
             username: user.username, 
@@ -99,7 +106,8 @@ class User{
             createdAt: user.createdAt, 
             favorites: user.favorites, 
             userStories: user.stories
-        }, response.data.token
+            }, 
+            response.data.token
         );
     }
 
@@ -107,18 +115,21 @@ class User{
     static async loginViaStoredCredentials(token, username){
         try{
             const response = await axios({
-                url:`${BASE_URL}/users/${username}`, method: "GET", params: {token},
+                url:`${BASE_URL}/users/${username}`, method: "GET", params: { token },
             });
 
-            let {user} = response.data;
+            let { user } = response.data;
 
-            return new User({
+            return new User(
+                {
                 username: user.username, 
                 name: user.name, 
                 createdAt: user.createdAt, 
                 favorites: user.favorites, 
                 userStories: user.stories
-            }, token);
+                }, 
+                token
+            );
         } catch (err){
             console.error("loginViaStoredCredentials failed", err);
             return null;
@@ -140,7 +151,7 @@ class User{
         const method = newState === "add" ? "POST" : "DELETE";
         const token = this.loginToken;
         await axios({
-            url:`${BASE_URL}/users/${this.username}/favorites/${story.storyId}`, method: method, data: {token},
+            url:`${BASE_URL}/users/${this.username}/favorites/${story.storyId}`, method: method, data: { token },
         });
     }
 
