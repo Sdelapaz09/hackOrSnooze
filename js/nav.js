@@ -1,14 +1,14 @@
 "use strict";
 
 /* Show list of all stories when site name is clicked */
-function navAllStories(evt){
-    console.debug("navAllStories", evt);
+function navAllStories(e){
+    console.debug("navAllStories", e);
     hidePageComponents();
     putStoriesOnPage();
 }
 $body.on("click", "#nav-all", navAllStories);
 
-/* Functionception - use inner functions and define later. Added & modified after navLoginClick function */
+
 function navSubmitStoryClick(e){
     console.debug("navSubmitStoryClick", e);
     hidePageComponents();
@@ -39,6 +39,7 @@ function navLoginClick(e){
     $signupForm.show();
     $storiesContainer.hide();
 }
+$navLogin.on("click","#navLoginClick", navLoginClick);
 
 function updateNavOnLogin(){
     console.debug("updateNavOnLogin");
